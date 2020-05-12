@@ -35,6 +35,9 @@ print(lshashing.knn_search(sample_data, point[0], k = 4, buckets = 3, radius = 2
 # Neighbor(index=16, distance=180.87564789103038, value=[[81 91 70]...])]
 ```
 
+Locality-sensitive hashing is an **approximate nearest neighbors search technique** which means that the resulted neighbors may not always be the exact nearest neighbor to the query point.
+To enhance and ensure better extactness, hash length used, number of hash tables and the buckets to search need to be tweaked. 
+
 I also made some comparison between **lshashing**, linear method to get KNNs and **scikit-learn's BallTree and KDTree** and here are the results.
 
 ```bash
