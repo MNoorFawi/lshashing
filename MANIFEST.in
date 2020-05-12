@@ -2,8 +2,6 @@ include setup.py
 include requirements.txt
 include README.md
 include MANIFEST.in
-include *.lock
 include *.py
 include LICENSE
-include Pipfile
 include tox.ini
