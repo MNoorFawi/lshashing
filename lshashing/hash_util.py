@@ -26,7 +26,6 @@ def bit_mutate(combs, bit, hash_len):
         nb[i] = "0" if nb[i] == "1" else "1"
     return int("".join(nb), 2)
 
-
 def search_near_hashes(table, new_bin, bins_to_search, k_searched, k_to_search, radius):
     candidates = set()
     visited_bins = {new_bin}
@@ -42,3 +41,4 @@ def search_near_hashes(table, new_bin, bins_to_search, k_searched, k_to_search, 
             candidates.update(table[new_bin])
             k_searched = k_searched + len(candidates)
     return candidates
+
