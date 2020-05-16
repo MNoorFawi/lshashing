@@ -11,6 +11,7 @@ For now it only supports **random projections** but future versions will support
 ```bash
 pip install lshashing
 ```
+Make sure the data and query points are numpy arrays!.
 
 ```python
 from lshashing import LSHRandom
@@ -35,6 +36,20 @@ print(lshashing.knn_search(sample_data, point[0], k = 4, buckets = 3, radius = 2
 # Neighbor(index=16, distance=180.87564789103038, value=[[81 91 70]...])]
 ```
 
+lshashing also supports **parallelism** using **joblib** library.
+
+```python
+sample_data = np.random.randint(size = (20, 20), low = 0, high = 100)
+point = np.random.randint(size = (1, 20), low = 0, high = 100)
+
+lsh_random_parallel = LSHRandom(sample_data, 4, parallel = True)
+lsh_random_parallel.knn_search(sample_data, point[0], 4, 3, parallel = True)
+# [Neighbor(index=7, distance=137.0729732660673, value=[[76 16 41]...]),
+#  Neighbor(index=1, distance=163.25133996387288, value=[[81 55 41]...]),
+#  Neighbor(index=4, distance=172.41519654601214, value=[[33 21  0]...]),
+#  Neighbor(index=8, distance=183.0327839486686, value=[[70 27 85]...])]
+```
+
 Locality-sensitive hashing is an **approximate nearest neighbors search technique** which means that the resulted neighbors may not always be the exact nearest neighbor to the query point.
 To enhance and ensure better extactness, hash length used, number of hash tables and the buckets to search need to be tweaked. 
 
@@ -44,24 +59,32 @@ I also made some comparison between **lshashing**, linear method to get KNNs and
 python examples/lshashing_compare.py
  
 # lshashing module
-# Sample data shape:  (10000, 10000)
+# Sample data shape:  (20000, 15000)
 
 # query point
-# (10000,)
+# (15000,)
 
 # Start comparison in searching for 4 NNs
 # ##### search knn traditionaly
-# time to perform:  46.329522132873535
+# time to perform:  143.73057675361633
 
 # ##### Search with lshashing package:
-# time to construct lsh:  1.1631906032562256
-# time to perform:  8.50294828414917
+# time to construct lsh:  1.6940016746520996
+# time to perform:  4.987746477127075
+
+# ##### Search with lshashing package in parallel:
+# time to construct lsh:  8.06048321723938
+# time to perform:  4.106183767318726
 
 # ##### Now with Scikit Learn
-# time to construct ball_tree:  14.541776418685913
-# time to perform:  0.1249244213104248
+# time to construct ball_tree:  55.20065641403198
+# time to perform:  0.43003249168395996
 
 # ##### With sklearn KDTree
-# time to construct the tree:  21.14064049720764
-# time to perform:  0.1249234676361084
+# time to construct the tree:  82.20907664299011
+# time to perform:  0.49397754669189453
+
+# ##### basic scikit-learn
+# time to fit dataset:  90.42933940887451
+# time to perform:  0.5779902935028076
 ```

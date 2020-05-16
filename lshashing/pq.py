@@ -8,6 +8,10 @@ class DistHeap:
     def push(self, item):
         insort(self._container, item)  # in by sort
 
+    def pushitems(self, items):
+        for i in items:
+            self.push(i)
+
     def __getitem__(self, item):
         return self._container[item]
 

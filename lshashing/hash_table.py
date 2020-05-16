@@ -15,7 +15,8 @@ class HashTable:
         new_hash = hash_fun(new_entry, self.rand_proj)
         return fill_table(self.hash_table, new_hash, n_rows)
 
-    def knn_search(self, query_point, k, buckets, radius = 2):
+    def _knn_search(self, query_point, k, buckets,
+                   radius = 2):
         if buckets > self.hash_len:
             buckets = self.hash_len - 1
         new_hash = hash_fun(query_point, self.rand_proj)
