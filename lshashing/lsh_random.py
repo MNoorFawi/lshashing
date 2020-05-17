@@ -21,6 +21,7 @@ class LSHRandom:
     def add_new_entry(self, data_point):
         for t in self.tables:
             t.add_new_entry(data_point, self.n_rows)
+        self.n_rows += data_point.shape[0]
 
     def knn_search(self, data, query_point, k, buckets,
                    dist_func = euclidean_dist, radius = 2, parallel = False):

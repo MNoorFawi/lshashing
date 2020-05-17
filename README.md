@@ -50,6 +50,32 @@ lsh_random_parallel.knn_search(sample_data, point[0], 4, 3, parallel = True)
 #  Neighbor(index=8, distance=183.0327839486686, value=[[70 27 85]...])]
 ```
 
+### Adding new entries
+Simply you can add new entries to the hash tables using the **add_new_entry** method.
+
+```python
+from lshashing import LSHRandom
+import numpy as np
+
+sample_data = np.random.randint(size = (15, 20), low = 0, high = 100)
+point = np.random.randint(size = (1, 20), low = 0, high = 100)
+
+lshashing = LSHRandom(sample_data, hash_len = 3, num_tables = 2)
+print(lshashing.tables[0].hash_table)
+# {4: [0, 1, 3, 6], 49: [2, 4, 8, 11, 14], 36: [5, 9, 12], 9: [7, 10, 13]}
+
+print(lshashing.n_rows)
+# 15
+
+lshashing.add_new_entry(point)
+
+print(lshashing.n_rows)
+# 16
+
+print(lshashing.tables[0].hash_table)
+# {4: [0, 1, 3, 6, 15], 49: [2, 4, 8, 11, 14], 36: [5, 9, 12], 9: [7, 10, 13]}
+```
+
 Locality-sensitive hashing is an **approximate nearest neighbors search technique** which means that the resulted neighbors may not always be the exact nearest neighbor to the query point.
 To enhance and ensure better extactness, hash length used, number of hash tables and the buckets to search need to be tweaked. 
 
