@@ -2,6 +2,7 @@
 
 [![](https://img.shields.io/badge/docs-latest-blue.svg)](https://mnoorfawi.github.io/lshashing/) 
 [![Build Status](https://travis-ci.com/MNoorFawi/lshashing.svg?branch=master)](https://travis-ci.com/MNoorFawi/lshashing)
+[![Downloads](https://static.pepy.tech/personalized-badge/lshashing?period=total&units=international_system&left_color=grey&right_color=yellowgreen&left_text=Downloads)](https://pepy.tech/project/lshashing)
 
 python library to perform Locality-Sensitive Hashing to search for nearest neighbors in high dimensional data.
 
