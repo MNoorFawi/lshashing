@@ -43,7 +43,8 @@ def visited(visited_bins, key):
         return False
 
 def euclidean_dist(a, b):
-    return np.sqrt(np.sum(np.array([(x - y) ** 2 for x, y in zip(a, b)])))
+    #return np.sqrt(np.sum(np.array([(x - y) ** 2 for x, y in zip(a, b)])))
+    return np.sum(np.array([(x - y) ** 2 for x, y in zip(a, b)]))
 
 def get_distances(candidate, candidate_point, query_point, dist_func):
     return NNeighbor(candidate, dist_func(candidate_point, query_point), candidate_point)
