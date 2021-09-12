@@ -113,8 +113,8 @@ python examples/lshashing_compare.py
 # time to perform:  0.49397754669189453
 
 # ##### basic scikit-learn
-# time to fit dataset:  90.42933940887451
-# time to perform:  0.5779902935028076
+# time to fit dataset:  0.5779902935028076
+# time to perform:  90.42933940887451
 ```
 
 ##### LSHashing performs a little bit slower than sklearn tree implementations. However, the main advantage comes when we need to add new entry or remove from our data, i.e. updating the table. In sklearn trees this can be hard as we may need to reconstruct the trees all over again. It is clearly obvious that it takes much more time to construct the trees than creating the buckets with LSHashing. LSHashing also allows addition of new data easily and in no time.
