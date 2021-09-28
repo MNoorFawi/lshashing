@@ -1,4 +1,19 @@
-from setuptools import setup
+from setuptools import setup, Extension
+import numpy as np
+
+cython_exists = False
+
+try:
+    from Cython.Distutils import build_ext
+    cython_exists = True
+except ImportError:
+    from distutils.command.build_ext import build_ext
+
+if cython_exists:
+    ext_modules=[
+        Extension("pyxdist", ["lshashing/pyxdist.pyx", "lshashing/dist.c"], 
+        include_dirs = [np.get_include()])
+    ]
 
 with open("README.md", "r", encoding="utf8") as rm:
     readme = rm.read()
@@ -8,7 +23,7 @@ with open("requirements.txt") as rq:
 
 setup(
       name="lshashing",
-      version="1.0.4",
+      version="1.0.5",
       description="Nearest neighbors search using locality-sensitive hashing",
       packages=["lshashing"],
       install_requires=requirements,
@@ -22,5 +37,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
-    ]
+    ],
+      cmdclass = {"build_ext": build_ext},
+      ext_modules = ext_modules
       )

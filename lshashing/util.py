@@ -1,6 +1,7 @@
 from collections import namedtuple
 import numpy as np
 from itertools import combinations
+from pyxdist import *
 #import math
 
 NN = namedtuple("NN", "index distance value")
@@ -43,7 +44,7 @@ def visited(visited_bins, key):
         return False
 
 def euclidean_dist(a, b):
-    return np.sqrt(np.sum(np.array([(x - y) ** 2 for x, y in zip(a, b)])))
+    return euclidean_dist_pyx(a, b)
     #return np.sum(np.array([(x - y) ** 2 for x, y in zip(a, b)]))
 
 def get_distances(candidate, candidate_point, query_point, dist_func):

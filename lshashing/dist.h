@@ -1,0 +1,1 @@
+long double euclidean_dist_c(double * x, double * y, int ln);

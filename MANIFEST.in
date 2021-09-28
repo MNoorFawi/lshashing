@@ -1,3 +1,6 @@
+recursive-include lshashing *.pyx
+recursive-include lshashing *.h
+recursive-include lshashing *.c
 recursive-include examples *.py
 
 include setup.py

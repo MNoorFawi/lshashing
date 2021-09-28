@@ -87,34 +87,30 @@ I also made some comparison between **lshashing**, linear method to get KNNs and
 python examples/lshashing_compare.py
  
 # lshashing module
-# Sample data shape:  (20000, 15000)
+# Sample data shape:  (500000, 1000)
 
 # query point
-# (15000,)
+# (1000,)
 
 # Start comparison in searching for 4 NNs
 # ##### search knn traditionaly
-# time to perform:  143.73057675361633
+# time to search:  2.4206862449645996
 
 # ##### Search with lshashing package:
-# time to construct lsh:  1.6940016746520996
-# time to perform:  4.987746477127075
-
-# ##### Search with lshashing package in parallel:
-# time to construct lsh:  8.06048321723938
-# time to perform:  4.106183767318726
+# time to construct lsh:  8.619176864624023
+# time to search:  0.06634998321533203
 
 # ##### Now with Scikit Learn
-# time to construct ball_tree:  55.20065641403198
-# time to perform:  0.43003249168395996
+# time to construct ball_tree:  102.57923364639282
+# time to search:  0.6436479091644287
 
 # ##### With sklearn KDTree
-# time to construct the tree:  82.20907664299011
-# time to perform:  0.49397754669189453
+# time to construct the tree:  127.4918167591095
+# time to search:  0.763181209564209
 
 # ##### basic scikit-learn
-# time to fit dataset:  0.5779902935028076
-# time to perform:  90.42933940887451
+# time to fit dataset:  0.2458806037902832
+# time to search:  6.279686450958252
 ```
 
-##### LSHashing performs a little bit slower than sklearn tree implementations. However, the main advantage comes when we need to add new entry or remove from our data, i.e. updating the table. In sklearn trees this can be hard as we may need to reconstruct the trees all over again. It is clearly obvious that it takes much more time to construct the trees than creating the buckets with LSHashing. LSHashing also allows addition of new data easily and in no time.
+##### LSHashing performs a little bit slower than sklearn tree implementations, sometimes better. However, the main advantage comes when we need to add new entry or remove from our data, i.e. updating the table. In sklearn trees this can be hard as we may need to reconstruct the trees all over again. It is clearly obvious that it takes much more time to construct the trees than creating the buckets with LSHashing. LSHashing also allows addition of new data easily and in no time.
