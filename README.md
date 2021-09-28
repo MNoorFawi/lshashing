@@ -113,4 +113,4 @@ python examples/lshashing_compare.py
 # time to search:  6.279686450958252
 ```
 
-##### LSHashing performs a little bit slower than sklearn tree implementations, sometimes better. However, the main advantage comes when we need to add new entry or remove from our data, i.e. updating the table. In sklearn trees this can be hard as we may need to reconstruct the trees all over again. It is clearly obvious that it takes much more time to construct the trees than creating the buckets with LSHashing. LSHashing also allows addition of new data easily and in no time.
+#### LSHashing performs a little bit slower than sklearn tree implementations, sometimes better. However, the main advantage comes when we need to add new entry or remove from our data, i.e. updating the table. In sklearn trees this can be hard as we may need to reconstruct the trees all over again. It is clearly obvious that it takes much more time to construct the trees than creating the buckets with LSHashing. LSHashing also allows addition of new data easily and in no time.
