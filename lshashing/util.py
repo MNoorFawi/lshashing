@@ -49,3 +49,6 @@ def euclidean_dist(a, b):
 
 def get_distances(candidate, candidate_point, query_point, dist_func):
     return NNeighbor(candidate, dist_func(candidate_point, query_point), candidate_point)
+    
+def nn_search(data, new_point, k, cands):
+    return knn_search_pyx(data, new_point, k, cands)

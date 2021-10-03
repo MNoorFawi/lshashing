@@ -1,6 +1,6 @@
 from .hash_table import HashTable
 from .pq import DistHeap
-from .util import NNeighbor, euclidean_dist, get_distances
+from .util import NNeighbor, euclidean_dist, get_distances, nn_search
 from .para_util import parallel_fill_table, parallel_knn_search
 
 class LSHRandom:
@@ -27,17 +27,20 @@ class LSHRandom:
                    dist_func = euclidean_dist, radius = 2, parallel = False):
         if parallel:
             nn_heap = parallel_knn_search(self.tables, data, query_point, k, buckets, dist_func, radius)
+            return nn_heap[:k]
         else:
             best_candidates = set()
             for t in self.tables:
                 tbc = t._knn_search(query_point, k, buckets, radius)
                 best_candidates.update(tbc)
-            nn_heap = DistHeap()
-            for c in best_candidates:
-                candidate_point = data[c, :]
-                nn = get_distances(c, candidate_point, query_point, dist_func)
-                nn_heap.push(nn)
-        return nn_heap[:k]
+            #nn_heap = DistHeap()
+            #for c in best_candidates:
+            #    candidate_point = data[c, :]
+            #    nn = get_distances(c, candidate_point, query_point, dist_func)
+            #    nn_heap.push(nn)
+        #return nn_heap[:k]
+            nns = nn_search(data[list(best_candidates), :], query_point, k, best_candidates)
+            return nns
 
 
 
