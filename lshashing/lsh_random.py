@@ -26,8 +26,11 @@ class LSHRandom:
     def knn_search(self, data, query_point, k, buckets,
                    dist_func = euclidean_dist, radius = 2, parallel = False):
         if parallel:
-            nn_heap = parallel_knn_search(self.tables, data, query_point, k, buckets, dist_func, radius)
-            return nn_heap[:k]
+            try:
+                nn_heap = parallel_knn_search(self.tables, data, query_point, k, buckets, dist_func, radius)
+                return nn_heap[:k]
+            except IndexError:
+                return "\nIndexError: It seems like a new entry was added to the hash table however the data has the same shape still\n"
         else:
             best_candidates = set()
             for t in self.tables:
@@ -39,8 +42,11 @@ class LSHRandom:
             #    nn = get_distances(c, candidate_point, query_point, dist_func)
             #    nn_heap.push(nn)
         #return nn_heap[:k]
-            nns = nn_search(data[list(best_candidates), :], query_point, k, best_candidates)
-            return nns
+            try:
+                nns = nn_search(data[list(best_candidates), :], query_point, k, best_candidates)
+                return nns
+            except IndexError:
+                return "\nIndexError: It seems like a new entry was added to the hash table however the data has the same shape still\n"
 
 
 
