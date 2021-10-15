@@ -9,7 +9,7 @@ class LSHRandom:
         self.hash_len = hash_len
         #self.tables = []
         if parallel:
-            self.tables = parallel_fill_table(data, self.dims, hash_len, num_tables)
+            self.tables = parallel_fill_table(data, self.dims, hash_len, num_tables, seed)
             #self.tables.extend(tables)
         else:
             self.tables = []
