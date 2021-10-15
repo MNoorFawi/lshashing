@@ -20,10 +20,10 @@ def bit_glue(bit, hash_len):
 
 def bit_mutate(combs, bit, hash_len):
     nb = bit_glue(bit, hash_len)
-    #shuffle(combs)
+    shuffle(combs)
     if len(combs) == 0:
         combs.append((randint(0, hash_len)))
-    mutation = choice(combs) #combs.pop()
+    mutation = combs.pop()
     if isinstance(mutation, int):
         if (len(nb) - 1) < mutation:
             mutation = len(nb) - 1
