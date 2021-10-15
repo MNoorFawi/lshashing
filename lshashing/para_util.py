@@ -3,9 +3,9 @@ from .hash_table import HashTable
 from .pq import DistHeap
 from .util import NNeighbor, euclidean_dist, get_distances
 
-def parallel_fill_table(data, dims, hash_len, num_tables):
+def parallel_fill_table(data, dims, hash_len, num_tables, seed):
     def _hash_build(data, hash_len, table, dims):
-        t = HashTable(hash_len, dims)
+        t = HashTable(hash_len, dims, seed)
         t.build_table(data)
         return t
     tables = Parallel(n_jobs = -2, max_nbytes = None)(delayed(
