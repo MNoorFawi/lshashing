@@ -1,5 +1,5 @@
 from .util import all_combs, visited
-from random import choice, randint #, shuffle
+from random import choice, randint, shuffle
 
 def fill_table(dct, hashes, n_rows = 0):
     indices = list(range(n_rows, n_rows + len(hashes)))
