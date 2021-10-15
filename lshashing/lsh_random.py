@@ -4,7 +4,7 @@ from .util import NNeighbor, euclidean_dist, get_distances, nn_search
 from .para_util import parallel_fill_table, parallel_knn_search
 
 class LSHRandom:
-    def __init__(self, data, hash_len, num_tables = 1, parallel = False):
+    def __init__(self, data, hash_len, num_tables = 1, seed = None, parallel = False):
         self.n_rows, self.dims = data.shape
         self.hash_len = hash_len
         #self.tables = []
@@ -14,7 +14,7 @@ class LSHRandom:
         else:
             self.tables = []
             for i in range(num_tables):
-                t = HashTable(hash_len, self.dims)
+                t = HashTable(hash_len, self.dims, seed)
                 self.tables.append(t)
                 self.tables[i].build_table(data)
 
