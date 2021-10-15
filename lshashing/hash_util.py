@@ -1,5 +1,5 @@
 from .util import all_combs, visited
-from random import shuffle, randint
+from random import choice, randint #, shuffle
 
 def fill_table(dct, hashes, n_rows = 0):
     indices = list(range(n_rows, n_rows + len(hashes)))
@@ -20,10 +20,10 @@ def bit_glue(bit, hash_len):
 
 def bit_mutate(combs, bit, hash_len):
     nb = bit_glue(bit, hash_len)
-    shuffle(combs)
+    #shuffle(combs)
     if len(combs) == 0:
         combs.append((randint(0, hash_len)))
-    mutation = combs.pop()
+    mutation = choice(combs) #combs.pop()
     if isinstance(mutation, int):
         if (len(nb) - 1) < mutation:
             mutation = len(nb) - 1
