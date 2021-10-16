@@ -91,55 +91,60 @@ I also made some comparison between **lshashing**, linear method to get KNNs and
 python examples/lshashing_compare.py
 
 #                 ##### LSHashing Module #####
-# sample data shape:  (500000, 1000)
+# sample data shape:  (15000, 30000)
 
 # query point
-# (1000,)
+# (30000,)
 
-#         ##### Start comparison in searching for 4 nearest neighbors #####
+#         ##### Start comparison in searching for 5 nearest neighbors #####
 
 # ##### search knn traditionaly
-# time to search: 2.96 seconds
+# time to search: 5.72 seconds
 
-# [(1180.7052976928662, 328154),
-#  (1184.2892383197611, 282673),
-#  (1184.7248625735851, 327675),
-#  (1186.7611385615894, 290300)]
+# [(69872.09976807624, 1844),
+#  (69876.11714312695, 7288),
+#  (69876.55885202132, 2554),
+#  (69939.38269673246, 9227),
+#  (69939.697440009, 5948)]
 
 
 # ##### Search with lshashing package:
-# time to construct 1 lsh tables of 15 hash length: 12.12 seconds
-# time to search in 3 buckets with radius 1: 0.06 seconds
+# time to construct 2 lsh tables of 15 hash length: 9.10 seconds
+# time to search in 10 buckets with radius 5: 0.37 seconds
 
 #          distances        indices
-# array([[  1236.83386111,  62772.        ],
-#        [  1255.55167158, 459337.        ],
-#        [  1261.44441019,  54191.        ],
-#        [  1264.74819628,   5934.        ]])
+# array([[69939.38269673,  9227.        ],
+#        [70032.03792551,  9782.        ],
+#        [70094.87232316,  6840.        ],
+#        [70117.99188511,  8432.        ],
+#        [70137.69944901,   331.        ]])
 
 
 # ##### Now with Scikit Learn
-# time to construct ball_tree: 103.78 seconds
-# time to search: 0.67 seconds
+# time to construct ball_tree: 40.51 seconds
+# time to search: 0.49 seconds
 
-# (array([[1180.70529769, 1184.28923832, 1184.72486257, 1186.76113856]]),
-#  array([[328154, 282673, 327675, 290300]]))
+# (array([[69872.09976808, 69876.11714313, 69876.55885202, 69939.38269673,
+#         69939.69744001]]),
+#  array([[1844, 7288, 2554, 9227, 5948]]))
 
 
 # ##### With sklearn KDTree
-# time to construct the tree: 121.88 seconds
-# time to search: 0.76 seconds
+# time to construct the tree: 51.69 seconds
+# time to search: 0.65 seconds
 
-# (array([[1180.70529769, 1184.28923832, 1184.72486257, 1186.76113856]]),
-#  array([[328154, 282673, 327675, 290300]]))
+# (array([[69872.09976808, 69876.11714313, 69876.55885202, 69939.38269673,
+#         69939.69744001]]),
+#  array([[1844, 7288, 2554, 9227, 5948]]))
 
 
 # ##### basic scikit-learn
-# time to fit dataset: 0.27 seconds
-# time to search: 6.06 seconds
+# time to fit dataset: 0.24 seconds
+# time to search: 4.36 seconds
 
-# (array([[1180.70529769, 1184.28923832, 1184.72486257, 1186.76113856]]),
-#  array([[328154, 282673, 327675, 290300]]))
+# (array([[69872.09976808, 69876.11714313, 69876.55885202, 69939.38269673,
+#         69939.69744001]]),
+#  array([[1844, 7288, 2554, 9227, 5948]]))
  
 ```
 
