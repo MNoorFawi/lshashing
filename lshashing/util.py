@@ -2,6 +2,7 @@ from collections import namedtuple
 import numpy as np
 from itertools import combinations
 from pyxdist import *
+from random import sample
 #import math
 
 NN = namedtuple("NN", "index distance value")
@@ -34,7 +35,13 @@ def hash_fun(data, rand_proj):
     return [unbinarize(binary) ** 2 for binary in binaries]
 
 def all_combs(hash_len, radius):
-    return list(combinations(range(hash_len), radius))
+    #return list(combinations(range(hash_len), radius))
+    rng = range(hash_len)
+    i = 0
+    p = tuple(rng)
+    while i <= radius:
+        yield [p[j] for j in sample(rng, radius)]
+        i += 1
 
 def visited(visited_bins, key):
     if key in visited_bins:

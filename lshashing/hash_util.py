@@ -1,5 +1,6 @@
 from .util import all_combs, visited
-from random import choice, randint, shuffle
+#from random import choice, randint, shuffle
+import numpy as np
 
 def fill_table(dct, hashes, n_rows = 0):
     indices = list(range(n_rows, n_rows + len(hashes)))
@@ -20,17 +21,22 @@ def bit_glue(bit, hash_len):
 
 def bit_mutate(combs, bit, hash_len):
     nb = bit_glue(bit, hash_len)
-    shuffle(combs)
-    if len(combs) == 0:
-        combs.append((randint(0, hash_len)))
-    mutation = combs.pop()
-    if isinstance(mutation, int):
-        if (len(nb) - 1) < mutation:
-            mutation = len(nb) - 1
-        nb[mutation] = "0" if nb[mutation] == "1" else "1"
-    else:
-        for i in mutation:
-            nb[i] = "0" if nb[i] == "1" else "1"
+    #shuffle(combs)
+    #if len(combs) == 0:
+    #    combs.append((randint(0, hash_len), ))
+    #mutation = combs.pop()
+    #if isinstance(mutation, int):
+        #if (len(nb) - 1) < mutation:
+        #    mutation = len(nb) - 1
+    #    nb[mutation] = "0" if nb[mutation] == "1" else "1"
+    #else:
+    try:
+        mutation = next(combs)
+    except StopIteration:
+        mutation = (np.random.randint(0, len(nb) - 1), )
+    
+    for i in mutation:
+        nb[i] = "0" if nb[i] == "1" else "1"
     return int("".join(nb), 2)
 
 def search_near_hashes(table, new_bin, bins_to_search, k_searched, k_to_search, radius):

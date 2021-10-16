@@ -23,7 +23,7 @@ with open("requirements.txt") as rq:
 
 setup(
       name="lshashing",
-      version="1.1.2",
+      version="1.1.3",
       description="Nearest neighbors search using locality-sensitive hashing",
       packages=["lshashing"],
       install_requires=requirements,

@@ -17,9 +17,9 @@ def get_knn_naive(points, query_point, k):
     return sorted(answer, key = lambda x: x[0])[:k]
 
 import numpy as np
-sample_data = np.random.randint(size = (500000, 1000), low = 0, high = 100)
+sample_data = np.random.randint(size = (20000, 15000), low = 0, high = 100)
 print("sample data shape: ", sample_data.shape, "\n")
-point = np.random.randint(size = (1, 1000), low = 0, high = 100)[0]
+point = np.random.randint(size = (1, 15000), low = 0, high = 100)[0]
 print("query point")
 print(point.shape, "\n")
 from time import time
@@ -34,12 +34,12 @@ print("\n")
 
 print("##### Search with lshashing package:")
 start = time()
-hash_len = 15
-num_tables = 1
+hash_len = 20
+num_tables = 3
 lsh_random = LSHRandom(sample_data, hash_len, num_tables = num_tables)
 print("time to construct %d lsh tables of %d hash length: %.2f seconds" % (num_tables, hash_len, round(time() - start, 2)))
-radius = 1
-buckets = 3
+radius = 10
+buckets = 12
 start = time()
 nns = lsh_random.knn_search(sample_data, point, k, buckets, radius = radius)
 print("time to search in %d buckets with radius %d: %.2f seconds\n" % (buckets, radius, round(time() - start, 2)))

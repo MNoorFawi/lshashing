@@ -1,13 +1,10 @@
 from .util import generate_rand_proj, hash_fun
 from .hash_util import *
-import numpy as np
 
 class HashTable:
-    def __init__(self, hash_len, dim, seed):
+    def __init__(self, hash_len, dim):
         self.hash_table = {}
         self.hash_len = hash_len
-        if not seed:
-            np.random.seed(seed)
         self.rand_proj = generate_rand_proj(self.hash_len, dim)
 
     def build_table(self, data):

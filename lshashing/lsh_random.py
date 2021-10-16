@@ -4,17 +4,17 @@ from .util import NNeighbor, euclidean_dist, get_distances, nn_search
 from .para_util import parallel_fill_table, parallel_knn_search
 
 class LSHRandom:
-    def __init__(self, data, hash_len, num_tables = 1, seed = None, parallel = False):
+    def __init__(self, data, hash_len, num_tables = 1, parallel = False):
         self.n_rows, self.dims = data.shape
         self.hash_len = hash_len
         #self.tables = []
         if parallel:
-            self.tables = parallel_fill_table(data, self.dims, hash_len, num_tables, seed)
+            self.tables = parallel_fill_table(data, self.dims, hash_len, num_tables)
             #self.tables.extend(tables)
         else:
             self.tables = []
             for i in range(num_tables):
-                t = HashTable(hash_len, self.dims, seed)
+                t = HashTable(hash_len, self.dims)
                 self.tables.append(t)
                 self.tables[i].build_table(data)
 

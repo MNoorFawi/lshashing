@@ -55,10 +55,6 @@ lsh_random_parallel.knn_search(sample_data, point[0], 4, 3, parallel = True)
 #  Neighbor(index=7, distance=183.15294155431957, value=[[75 39 27]...])]
 ```
 
-We can also assign a random seed to ensure same results and buckets every time we run the LSHRandom over the same data. We can use the "seed" argument in LSHRandom class:
-```python
-LSHRandom(sample_data, hash_len = 4, num_tables = 2, seed = 13)
-```
 
 ### Adding new entries
 Simply you can add new entries to the hash tables using the **add_new_entry** method.
